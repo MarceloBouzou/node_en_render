@@ -5,6 +5,12 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 navigator.geolocation.getCurrentPosition(async (pos) => {
   const { latitude, longitude } = pos.coords;
   L.marker([latitude, longitude]).addTo(map).bindPopup("Estás acá").openPopup();
+
+  console.log("Ubicación detectada:", latitude, longitude);
+document.getElementById("mensaje").innerHTML = `📍 Estás en: ${latitude.toFixed(5)}, ${longitude.toFixed(5)}`;
+
+
+
   map.setView([latitude, longitude], 14);
 
   const res = await fetch(`/api/locales?lat=${latitude}&lng=${longitude}`);
