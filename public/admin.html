@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Turnos recibidos</title>
+  <style>
+    body { font-family: sans-serif; padding: 1rem; background: #f8f8f8; }
+    table { border-collapse: collapse; width: 100%; margin-top: 1rem; }
+    th, td { border: 1px solid #ccc; padding: 0.5rem; text-align: left; }
+    th { background: #eee; }
+  </style>
+</head>
+<body>
+  <h2>📋 Turnos recibidos</h2>
+  <table id="tablaTurnos">
+    <thead>
+      <tr>
+        <th>Cliente</th>
+        <th>Teléfono</th>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Servicio</th>
+        <th>Local ID</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    function getLocalIdFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('localId');
+    }
+
+    async function cargarTurnos() {
+      const localId = getLocalIdFromUrl();
+      if (!localId) {
+        alert("Falta el parámetro ?localId= en la URL");
+        return;
+      }
+
+      const res = await fetch(`/api/admin/turnos?localId=${localId}`);
+      const json = await res.json();
+
+      if (json.success) {
+        const tbody = document.querySelector('#tablaTurnos tbody');
+        tbody.innerHTML = '';
+
+        json.data.forEach(turno => {
+          const row = `
+            <tr>
+              <td>${turno.nombre}</td>
+              <td>${turno.telefono}</td>
+              <td>${turno.fecha}</td>
+              <td>${turno.hora}</td>
+              <td>${turno.servicio}</td>
+              <td>${turno.localId}</td>
+            </tr>
+          `;
+          tbody.insertAdjacentHTML('beforeend', row);
+        });
+      }
+    }
+
+    cargarTurnos();
+  </script>
+
+</body>
+</html>

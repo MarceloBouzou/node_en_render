@@ -1,0 +1,230 @@
+[
+  {
+    "nombre": "Marcelo",
+    "telefono": "1122334455",
+    "fecha": "2025-07-13",
+    "hora": "15:30",
+    "localId": 1,
+    "servicio": "Masaje relajante",
+    "id": 1752452095287
+  },
+  {
+    "id": 1752452200201
+  },
+  {
+    "nombre": "Marcelo",
+    "telefono": "1122334455",
+    "fecha": "2025-07-13",
+    "hora": "15:30",
+    "localId": 1,
+    "servicio": "Masaje relajante",
+    "id": 1752452215893
+  },
+  {
+    "nombre": "Marcelo",
+    "telefono": "1122334455",
+    "fecha": "2025-07-13",
+    "hora": "15:30",
+    "localId": 1,
+    "servicio": "Masaje relajante",
+    "id": 1752452371660
+  },
+  {
+    "nombre": "estetica ranelagh",
+    "telefono": "121212",
+    "fecha": "2025-07-14",
+    "hora": "12:55",
+    "localId": 2,
+    "servicio": "Masaje relajante",
+    "id": 1752454359190
+  },
+  {
+    "nombre": "estetica ranelagh",
+    "telefono": "121212",
+    "fecha": "2025-07-14",
+    "hora": "12:55",
+    "localId": 2,
+    "servicio": "Masaje relajante",
+    "id": 1752454361372
+  },
+  {
+    "nombre": "minombre1",
+    "telefono": "mi telefono",
+    "fecha": "2025-07-15",
+    "hora": "10:15",
+    "localId": 3,
+    "servicio": "Limpieza facial",
+    "id": 1752457431237
+  },
+  {
+    "nombre": "minombre1",
+    "telefono": "mi telefono",
+    "fecha": "2025-07-15",
+    "hora": "10:15",
+    "localId": 3,
+    "servicio": "Limpieza facial",
+    "id": 1752457436788
+  },
+  {
+    "nombre": "minombre1",
+    "telefono": "mi telefono",
+    "fecha": "2025-07-15",
+    "hora": "10:15",
+    "localId": 3,
+    "servicio": "Limpieza facial",
+    "id": 1752457438730
+  },
+  {
+    "nombre": "minombre1",
+    "telefono": "mi telefono",
+    "fecha": "2025-07-15",
+    "hora": "10:15",
+    "localId": 3,
+    "servicio": "Limpieza facial",
+    "id": 1752457441746
+  },
+  {
+    "nombre": "minombre2",
+    "telefono": "18272331",
+    "fecha": "2025-05-22",
+    "hora": "10:10",
+    "localId": 1,
+    "servicio": "Tratamiento capilar",
+    "id": 1752457721266
+  },
+  {
+    "nombre": "nombre3",
+    "telefono": "3",
+    "fecha": "2025-03-03",
+    "hora": "10:30",
+    "localId": 3,
+    "servicio": "Limpieza facial",
+    "id": 1752457903530
+  },
+  {
+    "nombre": "nombre3",
+    "telefono": "3",
+    "fecha": "2025-05-14",
+    "hora": "10:30",
+    "localId": 3,
+    "servicio": "Limpieza facial",
+    "id": 1752457921968
+  },
+  {
+    "nombre": "1",
+    "telefono": "2",
+    "fecha": "2025-03-03",
+    "hora": "10:10",
+    "localId": 3,
+    "servicio": "Limpieza facial",
+    "id": 1752459427556
+  },
+  {
+    "nombre": "usuario1",
+    "telefono": "teluser1",
+    "fecha": "2025-10-10",
+    "hora": "10:15",
+    "localId": 3,
+    "servicio": "Limpieza facial",
+    "id": 1752461190595
+  },
+  {
+    "nombre": "usuario1",
+    "telefono": "teluser1",
+    "fecha": "2025-10-10",
+    "hora": "10:15",
+    "localId": 3,
+    "servicio": "Limpieza facial",
+    "id": 1752461190961
+  },
+  {
+    "nombre": "1",
+    "telefono": "2",
+    "fecha": "2025-01-01",
+    "hora": "10:10",
+    "localId": 3,
+    "servicio": "Limpieza facial",
+    "id": 1752461314393
+  },
+  {
+    "nombre": "1",
+    "telefono": "2",
+    "fecha": "2025-01-01",
+    "hora": "10:10",
+    "localId": 3,
+    "servicio": "Limpieza facial",
+    "id": 1752461319903
+  },
+  {
+    "nombre": "1",
+    "telefono": "2",
+    "fecha": "2025-01-01",
+    "hora": "10:10",
+    "localId": 3,
+    "servicio": "Limpieza facial",
+    "id": 1752461320427
+  },
+  {
+    "nombre": "1",
+    "telefono": "2",
+    "fecha": "2025-01-01",
+    "hora": "10:10",
+    "localId": 3,
+    "servicio": "Limpieza facial",
+    "id": 1752461320859
+  },
+  {
+    "nombre": "1",
+    "telefono": "2",
+    "fecha": "2025-01-01",
+    "hora": "10:10",
+    "localId": 3,
+    "servicio": "Limpieza facial",
+    "id": 1752461321292
+  },
+  {
+    "nombre": "6",
+    "telefono": "6",
+    "fecha": "2025-06-06",
+    "hora": "10:10",
+    "localId": 3,
+    "servicio": "Limpieza facial",
+    "id": 1752461517383
+  },
+  {
+    "nombre": "6",
+    "telefono": "6",
+    "fecha": "2025-06-06",
+    "hora": "10:10",
+    "localId": 3,
+    "servicio": "Limpieza facial",
+    "id": 1752461522783
+  },
+  {
+    "nombre": "11",
+    "telefono": "11",
+    "fecha": "2025-11-11",
+    "hora": "11:11",
+    "localId": 1,
+    "servicio": "Masaje relajante",
+    "id": 1752461683859
+  },
+  {
+    "nombre": "11",
+    "telefono": "11",
+    "fecha": "2025-11-11",
+    "hora": "11:11",
+    "localId": 1,
+    "servicio": "Masaje relajante",
+    "id": 1752461692039
+  },
+  {
+    "nombre": "11",
+    "telefono": "11",
+    "fecha": "2025-11-11",
+    "hora": "11:11",
+    "localId": 1,
+    "servicio": "Masaje relajante",
+    "id": 1752461758720
+  }
+]

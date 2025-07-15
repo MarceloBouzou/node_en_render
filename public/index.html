@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reservá tu turno</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <h2>Reservá tu turno</h2>
+  <div id="map"></div>
+
+  <div id="formulario">
+    <button onclick="cerrarFormulario()" class="close-btn">❌</button>
+    <div id="mensaje"></div>
+    <form id="turnoForm">
+      <input type="hidden" id="localId" />
+      <label>Nombre:</label>
+      <input type="text" id="nombre" required />
+      <label>Teléfono:</label>
+      <input type="tel" id="telefono" required />
+      <label>Fecha:</label>
+      <input type="date" id="fecha" required />
+      <label>Hora:</label>
+      <input type="time" id="hora" required />
+      <label>Servicio:</label>
+      <select id="servicio" required>
+        <option value="">Seleccione</option>
+        <option>Masaje relajante</option>
+        <option>Limpieza facial</option>
+        <option>Tratamiento capilar</option>
+      </select>
+      <button type="submit">Reservar turno</button>
+    </form>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

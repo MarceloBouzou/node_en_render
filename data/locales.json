@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "nombre": "Spa Berazategui",
+    "lat": -34.7598,
+    "lng": -58.1923,
+    "email": "berazategui@spa.com"
+  },
+  {
+    "id": 2,
+    "nombre": "Estética Ranelagh",
+    "lat": -34.7555,
+    "lng": -58.1890,
+    "email": "ranelagh@estetica.com"
+  },
+  {
+    "id": 3,
+    "nombre": "Centro de Belleza Quilmes",
+    "lat": -34.7680,
+    "lng": -58.2035,
+    "email": "quilmes@belleza.com"
+  }
+]

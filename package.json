@@ -1,11 +1,18 @@
 {
-  "name": "node-reservas-api",
+  "name": "turnos-app",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "Sistema de reservas de turnos con mapa y notificaciones",
+  "main": "main.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node main.js",
+    "dev": "nodemon main.js"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "nodemailer": "^6.9.8"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }

@@ -1,0 +1,88 @@
+:root {
+  --primary: #A68A64;
+  --background: #F9F6F1;
+  --text: #333;
+  --white: #fff;
+  --shadow: rgba(0, 0, 0, 0.05);
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: var(--background);
+  color: var(--text);
+}
+
+h2 {
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+#map {
+  height: 300px;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 1rem auto;
+  max-width: 600px;
+  box-shadow: 0 4px 10px var(--shadow);
+}
+
+#formulario {
+  display: none;
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px var(--shadow);
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+label {
+  display: block;
+  margin: 1rem 0 0.4rem;
+  font-weight: 600;
+}
+
+input, select {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+button[type="submit"] {
+  margin-top: 1.5rem;
+  padding: 0.8rem;
+  width: 100%;
+  background: var(--primary);
+  color: var(--white);
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+button[type="submit"]:hover {
+  background: #927957;
+}
+
+#mensaje {
+  margin-top: 1rem;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.close-btn {
+  float: right;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #888;
+  cursor: pointer;
+}
