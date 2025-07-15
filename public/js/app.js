@@ -1,79 +1,79 @@
-// --- Sin cambios en la parte del mapa ---
-const map = L.map('map').setView([-34.6037, -58.3816], 13);
+const map = L.map('map').setView([-34.7723, -58.2220], 13); // Berazategui por defecto
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
+let marcadorUsuario = null;
 
-
-navigator.geolocation.getCurrentPosition(
-  async (pos) => {
-    const { latitude, longitude } = pos.coords;
-
-    console.log("📍 Ubicación detectada:", latitude, longitude);
-
-    // Mostrar en pantalla (opcional)
-    const infoUbicacion = document.getElementById("mensaje");
-    if (infoUbicacion) {
-      infoUbicacion.innerHTML = `📍 Estás en: ${latitude.toFixed(5)}, ${longitude.toFixed(5)}`;
-    }
-
-    // Marcamos al usuario
-    L.marker([latitude, longitude]).addTo(map).bindPopup("Estás acá").openPopup();
-    map.setView([latitude, longitude], 14);
-
-    // Buscamos locales cercanos
-    const res = await fetch(`/api/locales?lat=${latitude}&lng=${longitude}`);
-    const data = await res.json();
-
-    data.data.forEach((local) => {
-      L.marker([local.lat, local.lng]).addTo(map)
-        .bindPopup(`<strong>${local.nombre}</strong><br><button onclick="seleccionarLocal(${local.id})">Reservar</button>`);
+function cargarLocales(lat, lng) {
+  fetch(`/api/locales?lat=${lat}&lng=${lng}`)
+    .then(res => res.json())
+    .then(data => {
+      // Primero removemos todos los marcadores actuales (si querés hacer esto)
+      // También podés agregar lógica para evitar duplicados
+      data.data.forEach((local) => {
+        L.marker([local.lat, local.lng]).addTo(map)
+          .bindPopup(`<strong>${local.nombre}</strong><br><button onclick="seleccionarLocal(${local.id})">Reservar</button>`);
+      });
+    })
+    .catch(err => {
+      console.error("Error cargando locales:", err);
     });
-  },
-  (err) => {
-    console.error("❌ Error al obtener ubicación:", err);
-    alert("No pudimos detectar tu ubicación exacta. Mostramos un mapa aproximado.");
-    // Acá podrías mantener el mapa centrado en Buenos Aires si querés
-  },
-  { enableHighAccuracy: true }
-);
+}
 
+function marcarUbicacion(lat, lng) {
+  if (marcadorUsuario) {
+    map.removeLayer(marcadorUsuario);
+  }
+  marcadorUsuario = L.marker([lat, lng]).addTo(map).bindPopup("Estás acá").openPopup();
+  map.setView([lat, lng], 14);
+}
 
+// --- Intentamos geolocalizar ---
+if (!navigator.geolocation) {
+  alert("Tu navegador no soporta geolocalización.");
+  cargarLocales(-34.7723, -58.2220);
+} else {
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      const { latitude, longitude } = pos.coords;
+      marcarUbicacion(latitude, longitude);
+      cargarLocales(latitude, longitude);
+    },
+    (err) => {
+      alert("No se pudo obtener tu ubicación. Se usará ubicación estimada.");
+      marcarUbicacion(-34.7723, -58.2220);
+      cargarLocales(-34.7723, -58.2220);
+    }
+  );
+}
 
+// --- Cada vez que el mapa se mueva o se haga zoom, recargamos locales ---
+map.on('moveend zoomend', () => {
+  const center = map.getCenter();
+  cargarLocales(center.lat, center.lng);
+});
+
+// --- FORMULARIO ---
 function seleccionarLocal(id) {
   document.getElementById('formulario').style.display = 'block';
   document.getElementById('localId').value = id;
   window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
 }
 
-// --- FUNCIÓN MEJORADA ---
 function cerrarFormulario() {
-  // 1. Oculta el contenedor principal del formulario
   document.getElementById('formulario').style.display = 'none';
-  
-  // 2. Resetea los campos del formulario para que estén vacíos la próxima vez
   document.getElementById('turnoForm').reset();
-  
-  // 3. Limpia cualquier mensaje de éxito o error
   document.getElementById('mensaje').innerHTML = '';
-  
-  // 4. (IMPORTANTE) Asegura que el formulario interno vuelva a ser visible
   document.getElementById('turnoForm').style.display = 'block';
-
-  // 5. (IMPORTANTE) Asegura que el botón de submit esté habilitado
-  const btn = document.querySelector('#turnoForm button[type="submit"]');
-  btn.disabled = false;
+  document.querySelector('#turnoForm button[type="submit"]').disabled = false;
 }
 
-// --- LISTENER DE SUBMIT MEJORADO ---
 document.getElementById('turnoForm').addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const submitButton = e.target.querySelector('button[type="submit"]');
   const mensaje = document.getElementById('mensaje');
-  
-  // Deshabilitamos el botón para evitar envíos duplicados
   submitButton.disabled = true;
-  mensaje.innerHTML = 'Enviando reserva...'; // Mensaje de carga opcional
+  mensaje.innerHTML = 'Enviando reserva...';
 
   const body = {
     nombre: document.getElementById('nombre').value,
@@ -94,22 +94,13 @@ document.getElementById('turnoForm').addEventListener('submit', async (e) => {
 
     if (json.success) {
       mensaje.innerHTML = '✅ Tu reserva fue recibida. En breve nos comunicaremos para confirmarla.';
-      
-      // Ocultamos solo los campos del formulario para que el mensaje de éxito se vea claramente
       document.getElementById('turnoForm').style.display = 'none';
-
-      // Esperamos 3 segundos para que el usuario lea el mensaje y luego cerramos todo.
-      setTimeout(() => {
-        cerrarFormulario();
-      }, 3000); // Aumentado a 3 segundos para mejor UX
-
+      setTimeout(cerrarFormulario, 3000);
     } else {
-      // Si falla, mostramos el error y rehabilitamos el botón
       mensaje.innerHTML = `❌ ${json.message || 'Hubo un problema al enviar la reserva. Inténtalo nuevamente.'}`;
       submitButton.disabled = false;
     }
   } catch (error) {
-    // Si hay un error de red, también lo manejamos
     mensaje.innerHTML = '❌ Error de conexión. No se pudo enviar la reserva.';
     submitButton.disabled = false;
   }
