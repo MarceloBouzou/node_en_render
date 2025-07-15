@@ -2,25 +2,42 @@
 const map = L.map('map').setView([-34.6037, -58.3816], 13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-navigator.geolocation.getCurrentPosition(async (pos) => {
-  const { latitude, longitude } = pos.coords;
-  L.marker([latitude, longitude]).addTo(map).bindPopup("Estás acá").openPopup();
-
-  console.log("Ubicación detectada:", latitude, longitude);
-document.getElementById("mensaje").innerHTML = `📍 Estás en: ${latitude.toFixed(5)}, ${longitude.toFixed(5)}`;
 
 
+navigator.geolocation.getCurrentPosition(
+  async (pos) => {
+    const { latitude, longitude } = pos.coords;
 
-  map.setView([latitude, longitude], 14);
+    console.log("📍 Ubicación detectada:", latitude, longitude);
 
-  const res = await fetch(`/api/locales?lat=${latitude}&lng=${longitude}`);
-  const data = await res.json();
+    // Mostrar en pantalla (opcional)
+    const infoUbicacion = document.getElementById("mensaje");
+    if (infoUbicacion) {
+      infoUbicacion.innerHTML = `📍 Estás en: ${latitude.toFixed(5)}, ${longitude.toFixed(5)}`;
+    }
 
-  data.data.forEach((local) => {
-    L.marker([local.lat, local.lng]).addTo(map)
-      .bindPopup(`<strong>${local.nombre}</strong><br><button onclick="seleccionarLocal(${local.id})">Reservar</button>`);
-  });
-});
+    // Marcamos al usuario
+    L.marker([latitude, longitude]).addTo(map).bindPopup("Estás acá").openPopup();
+    map.setView([latitude, longitude], 14);
+
+    // Buscamos locales cercanos
+    const res = await fetch(`/api/locales?lat=${latitude}&lng=${longitude}`);
+    const data = await res.json();
+
+    data.data.forEach((local) => {
+      L.marker([local.lat, local.lng]).addTo(map)
+        .bindPopup(`<strong>${local.nombre}</strong><br><button onclick="seleccionarLocal(${local.id})">Reservar</button>`);
+    });
+  },
+  (err) => {
+    console.error("❌ Error al obtener ubicación:", err);
+    alert("No pudimos detectar tu ubicación exacta. Mostramos un mapa aproximado.");
+    // Acá podrías mantener el mapa centrado en Buenos Aires si querés
+  },
+  { enableHighAccuracy: true }
+);
+
+
 
 function seleccionarLocal(id) {
   document.getElementById('formulario').style.display = 'block';
